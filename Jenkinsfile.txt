@@ -1,0 +1,45 @@
+pipeline{
+agent any
+stages{
+stage('one'){
+steps{
+echo 'Hi Amit This side'
+}
+}
+stage('two')
+{
+when {
+not{
+branch 'master'
+}
+}
+steps {
+echo 'hello'
+}
+}
+stage('four')
+{
+parllel{
+stage('unit test')
+{
+steps{
+echo "running thge test"
+}
+}
+stage4('integration Test')
+agent{
+docker{
+reuseNode false
+image 'ubuntu'
+}
+}
+steps{
+echo 'running integration test'
+}
+}
+}
+}
+}
+}
+}
+}
